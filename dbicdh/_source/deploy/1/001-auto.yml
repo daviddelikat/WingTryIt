@@ -1,0 +1,857 @@
+---
+schema:
+  procedures: {}
+  tables:
+    api_key_permissions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - api_key_id
+          match_type: ''
+          name: api_key_permissions_fk_api_key_id
+          on_delete: CASCADE
+          on_update: CASCADE
+          options: []
+          reference_fields:
+            - id
+          reference_table: api_keys
+          type: FOREIGN KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - user_id
+          match_type: ''
+          name: api_key_permissions_fk_user_id
+          on_delete: CASCADE
+          on_update: CASCADE
+          options: []
+          reference_fields:
+            - id
+          reference_table: users
+          type: FOREIGN KEY
+      fields:
+        api_key_id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: api_key_id
+          order: 5
+          size:
+            - 36
+        date_created:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_created
+          order: 2
+          size:
+            - 0
+        date_updated:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_updated
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 36
+        permission:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: permission
+          order: 4
+          size:
+            - 30
+        user_id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: user_id
+          order: 6
+          size:
+            - 36
+      indices:
+        - fields:
+            - api_key_id
+          name: api_key_permissions_idx_api_key_id
+          options: []
+          type: NORMAL
+        - fields:
+            - user_id
+          name: api_key_permissions_idx_user_id
+          options: []
+          type: NORMAL
+        - fields:
+            - date_created
+          name: idx_date_created
+          options: []
+          type: NORMAL
+        - fields:
+            - date_updated
+          name: idx_date_updated
+          options: []
+          type: NORMAL
+        - fields:
+            - api_key_id
+            - user_id
+          name: idx_apikey_user
+          options: []
+          type: NORMAL
+      name: api_key_permissions
+      options: []
+      order: 3
+    api_keys:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - name
+          match_type: ''
+          name: api_keys_name
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+        - deferrable: 1
+          expression: ''
+          fields:
+            - user_id
+          match_type: ''
+          name: api_keys_fk_user_id
+          on_delete: CASCADE
+          on_update: CASCADE
+          options: []
+          reference_fields:
+            - id
+          reference_table: users
+          type: FOREIGN KEY
+      fields:
+        date_created:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_created
+          order: 2
+          size:
+            - 0
+        date_updated:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_updated
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 36
+        name:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: name
+          order: 6
+          size:
+            - 30
+        private_key:
+          data_type: char
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: private_key
+          order: 4
+          size:
+            - 36
+        reason:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: reason
+          order: 5
+          size:
+            - 255
+        uri:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: uri
+          order: 7
+          size:
+            - 255
+        user_id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: user_id
+          order: 8
+          size:
+            - 36
+      indices:
+        - fields:
+            - user_id
+          name: api_keys_idx_user_id
+          options: []
+          type: NORMAL
+        - fields:
+            - date_created
+          name: idx_date_created
+          options: []
+          type: NORMAL
+        - fields:
+            - date_updated
+          name: idx_date_updated
+          options: []
+          type: NORMAL
+      name: api_keys
+      options: []
+      order: 2
+    users:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - email
+          match_type: ''
+          name: users_email
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+        - deferrable: 1
+          expression: ''
+          fields:
+            - username
+          match_type: ''
+          name: users_username
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        admin:
+          data_type: tinyint
+          default_value: 0
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: admin
+          order: 4
+          size:
+            - 0
+        date_created:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_created
+          order: 2
+          size:
+            - 0
+        date_updated:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: date_updated
+          order: 3
+          size:
+            - 0
+        developer:
+          data_type: tinyint
+          default_value: 0
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: developer
+          order: 12
+          size:
+            - 0
+        email:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 1
+          name: email
+          order: 9
+          size:
+            - 255
+        id:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 36
+        last_login:
+          data_type: datetime
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: last_login
+          order: 13
+          size:
+            - 0
+        password:
+          data_type: char
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: password
+          order: 10
+          size:
+            - 50
+        password_salt:
+          data_type: char
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: password_salt
+          order: 7
+          size:
+            - 16
+        password_type:
+          data_type: varchar
+          default_value: bcrypt
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: password_type
+          order: 6
+          size:
+            - 10
+        real_name:
+          data_type: varchar
+          default_value: ''
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 0
+          name: real_name
+          order: 5
+          size:
+            - 255
+        use_as_display_name:
+          data_type: varchar
+          default_value: username
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: use_as_display_name
+          order: 11
+          size:
+            - 10
+        username:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: username
+          order: 8
+          size:
+            - 30
+      indices:
+        - fields:
+            - real_name
+            - username
+            - email
+          name: idx_search
+          options: []
+          type: NORMAL
+      name: users
+      options: []
+      order: 1
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 1
+  filename: ~
+  no_comments: 0
+  parser_args:
+    package: &1 !!perl/hash:TryIt::DB
+      class_mappings:
+        DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult: __VERSION
+        TryIt::DB::Result::APIKey: APIKey
+        TryIt::DB::Result::APIKeyPermission: APIKeyPermission
+        TryIt::DB::Result::User: User
+      source_registrations:
+        APIKey: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            name:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+            private_key:
+              data_type: char
+              is_nullable: 1
+              size: 36
+            reason:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            uri:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            user_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - private_key
+            - reason
+            - name
+            - uri
+            - user_id
+          _primaries: &2
+            - id
+          _relationships:
+            permissions:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKeyPermission
+              cond:
+                foreign.api_key_id: self.id
+              source: TryIt::DB::Result::APIKeyPermission
+            user:
+              attrs:
+                accessor: single
+                fk_columns:
+                  user_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::User
+              cond:
+                foreign.id: self.user_id
+              source: TryIt::DB::Result::User
+          _unique_constraints:
+            api_keys_name:
+              - name
+            primary: *2
+          name: api_keys
+          result_class: TryIt::DB::Result::APIKey
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: APIKey
+        APIKeyPermission: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            api_key_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            permission:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+            user_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - permission
+            - api_key_id
+            - user_id
+          _primaries: &3
+            - id
+          _relationships:
+            apikey:
+              attrs:
+                accessor: single
+                fk_columns:
+                  api_key_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::APIKey
+              cond:
+                foreign.id: self.api_key_id
+              source: TryIt::DB::Result::APIKey
+            user:
+              attrs:
+                accessor: single
+                fk_columns:
+                  user_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::User
+              cond:
+                foreign.id: self.user_id
+              source: TryIt::DB::Result::User
+          _unique_constraints:
+            primary: *3
+          name: api_key_permissions
+          result_class: TryIt::DB::Result::APIKeyPermission
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: APIKeyPermission
+        User: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            admin:
+              data_type: tinyint
+              default_value: 0
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            developer:
+              data_type: tinyint
+              default_value: 0
+              is_nullable: 0
+            email:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            last_login:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              is_nullable: 0
+            password:
+              data_type: char
+              size: 50
+            password_salt:
+              data_type: char
+              is_nullable: 1
+              size: 16
+            password_type:
+              data_type: varchar
+              default_value: bcrypt
+              is_nullable: 0
+              size: 10
+            real_name:
+              data_type: varchar
+              default_value: ''
+              is_nullable: 0
+              size: 255
+            use_as_display_name:
+              data_type: varchar
+              default_value: username
+              is_nullable: 1
+              size: 10
+            username:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - admin
+            - real_name
+            - password_type
+            - password_salt
+            - username
+            - email
+            - password
+            - use_as_display_name
+            - developer
+            - last_login
+          _primaries: &4
+            - id
+          _relationships:
+            api_key_permissions:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKeyPermission
+              cond:
+                foreign.user_id: self.id
+              source: TryIt::DB::Result::APIKeyPermission
+            api_keys:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKey
+              cond:
+                foreign.user_id: self.id
+              source: TryIt::DB::Result::APIKey
+          _unique_constraints:
+            primary: *4
+            users_email:
+              - email
+            users_username:
+              - username
+          name: users
+          result_class: TryIt::DB::Result::User
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: User
+        __VERSION: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            ddl:
+              data_type: text
+              is_nullable: 1
+            id:
+              data_type: int
+              is_auto_increment: 1
+            upgrade_sql:
+              data_type: text
+              is_nullable: 1
+            version:
+              data_type: varchar
+              size: 50
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - version
+            - ddl
+            - upgrade_sql
+          _primaries: &5
+            - id
+          _relationships: {}
+          _unique_constraints:
+            dbix_class_deploymenthandler_versions_version:
+              - version
+            primary: *5
+          name: dbix_class_deploymenthandler_versions
+          result_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResultSet
+          schema: *1
+          source_name: __VERSION
+      storage: !!perl/hash:DBIx::Class::Storage::DBI::mysql
+        _conn_pid: 10045
+        _connect_info:
+          - DBI:mysql:database=tryit
+          - tryit
+          - tryit
+          - mysql_enable_utf8: 1
+          - quote_names: 1
+        _dbh: !!perl/hash:DBI::db {}
+        _dbh_autocommit: 1
+        _dbh_details: {}
+        _dbh_gen: 0
+        _dbi_connect_info:
+          - DBI:mysql:database=tryit
+          - tryit
+          - tryit
+          - &6
+            AutoCommit: 1
+            PrintError: 0
+            RaiseError: 1
+            ShowErrorStatement: 1
+            mysql_enable_utf8: 1
+        _dbic_connect_attributes: *6
+        _driver_determined: 1
+        _in_do_block: 0
+        _sql_maker: !!perl/hash:DBIx::Class::SQLMaker::MySQL
+          array_datatypes: 1
+          bindtype: columns
+          cmp: =
+          equality_op: !!perl/regexp (?^i:^(\=|is|(is\s+)?like)$)
+          inequality_op: !!perl/regexp (?^i:^(!=|<>|(is\s+)?not(\s+like)?)$)
+          injection_guard: !!perl/regexp |-
+            (?^mix:
+                \;
+                  |
+                ^ \s* go \s
+              )
+          limit_dialect: LimitXY
+          logic: OR
+          name_sep: .
+          quote_char: '`'
+          quote_names: 1
+          special_ops:
+            - handler: _where_field_BETWEEN
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? between $)'
+            - handler: _where_field_IN
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? in      $)'
+            - handler: _where_op_IDENT
+              regex: !!perl/regexp (?^ix:^ ident                 $)
+            - handler: _where_op_VALUE
+              regex: !!perl/regexp (?^ix:^ value                 $)
+          sqlfalse: 0=1
+          sqltrue: 1=1
+          unary_ops:
+            - handler: _where_op_ANDOR
+              regex: !!perl/regexp '(?^ix:^ and  (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_ANDOR
+              regex: !!perl/regexp '(?^ix:^ or   (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_NEST
+              regex: !!perl/regexp '(?^ix:^ nest (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_BOOL
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? bool     $)'
+            - handler: _where_op_IDENT
+              regex: !!perl/regexp (?^ix:^ ident                  $)
+            - handler: _where_op_VALUE
+              regex: !!perl/regexp (?^ix:^ value                  $)
+        _sql_maker_opts:
+          quote_names: 1
+        savepoints: []
+        schema: *1
+        transaction_depth: 0
+    sources:
+      - User
+      - APIKeyPermission
+      - APIKey
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11016

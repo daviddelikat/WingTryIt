@@ -1,0 +1,477 @@
+---
+schema:
+  procedures: {}
+  tables:
+    dbix_class_deploymenthandler_versions:
+      constraints:
+        - deferrable: 1
+          expression: ''
+          fields:
+            - id
+          match_type: ''
+          name: ''
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: PRIMARY KEY
+        - deferrable: 1
+          expression: ''
+          fields:
+            - version
+          match_type: ''
+          name: dbix_class_deploymenthandler_versions_version
+          on_delete: ''
+          on_update: ''
+          options: []
+          reference_fields: []
+          reference_table: ''
+          type: UNIQUE
+      fields:
+        ddl:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: ddl
+          order: 3
+          size:
+            - 0
+        id:
+          data_type: int
+          default_value: ~
+          is_auto_increment: 1
+          is_nullable: 0
+          is_primary_key: 1
+          is_unique: 0
+          name: id
+          order: 1
+          size:
+            - 0
+        upgrade_sql:
+          data_type: text
+          default_value: ~
+          is_nullable: 1
+          is_primary_key: 0
+          is_unique: 0
+          name: upgrade_sql
+          order: 4
+          size:
+            - 0
+        version:
+          data_type: varchar
+          default_value: ~
+          is_nullable: 0
+          is_primary_key: 0
+          is_unique: 1
+          name: version
+          order: 2
+          size:
+            - 50
+      indices: []
+      name: dbix_class_deploymenthandler_versions
+      options: []
+      order: 1
+  triggers: {}
+  views: {}
+translator:
+  add_drop_table: 1
+  filename: ~
+  no_comments: 0
+  parser_args:
+    package: &1 !!perl/hash:TryIt::DB
+      class_mappings:
+        DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult: __VERSION
+        TryIt::DB::Result::APIKey: APIKey
+        TryIt::DB::Result::APIKeyPermission: APIKeyPermission
+        TryIt::DB::Result::User: User
+      source_registrations:
+        APIKey: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            name:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+            private_key:
+              data_type: char
+              is_nullable: 1
+              size: 36
+            reason:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            uri:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            user_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - private_key
+            - reason
+            - name
+            - uri
+            - user_id
+          _primaries: &2
+            - id
+          _relationships:
+            permissions:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKeyPermission
+              cond:
+                foreign.api_key_id: self.id
+              source: TryIt::DB::Result::APIKeyPermission
+            user:
+              attrs:
+                accessor: single
+                fk_columns:
+                  user_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::User
+              cond:
+                foreign.id: self.user_id
+              source: TryIt::DB::Result::User
+          _unique_constraints:
+            api_keys_name:
+              - name
+            primary: *2
+          name: api_keys
+          result_class: TryIt::DB::Result::APIKey
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: APIKey
+        APIKeyPermission: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            api_key_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            permission:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+            user_id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - permission
+            - api_key_id
+            - user_id
+          _primaries: &3
+            - id
+          _relationships:
+            apikey:
+              attrs:
+                accessor: single
+                fk_columns:
+                  api_key_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::APIKey
+              cond:
+                foreign.id: self.api_key_id
+              source: TryIt::DB::Result::APIKey
+            user:
+              attrs:
+                accessor: single
+                fk_columns:
+                  user_id: 1
+                is_foreign_key_constraint: 1
+                undef_on_null_fk: 1
+              class: TryIt::DB::Result::User
+              cond:
+                foreign.id: self.user_id
+              source: TryIt::DB::Result::User
+          _unique_constraints:
+            primary: *3
+          name: api_key_permissions
+          result_class: TryIt::DB::Result::APIKeyPermission
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: APIKeyPermission
+        User: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            admin:
+              data_type: tinyint
+              default_value: 0
+            date_created:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+            date_updated:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              dynamic_default_on_update: get_timestamp
+            developer:
+              data_type: tinyint
+              default_value: 0
+              is_nullable: 0
+            email:
+              data_type: varchar
+              is_nullable: 1
+              size: 255
+            id:
+              data_type: char
+              is_nullable: 0
+              size: 36
+            last_login:
+              _ic_dt_method: datetime
+              _inflate_info:
+                deflate: !!perl/code '{ "DUMMY" }'
+                inflate: !!perl/code '{ "DUMMY" }'
+              data_type: datetime
+              dynamic_default_on_create: get_timestamp
+              is_nullable: 0
+            password:
+              data_type: char
+              size: 50
+            password_salt:
+              data_type: char
+              is_nullable: 1
+              size: 16
+            password_type:
+              data_type: varchar
+              default_value: bcrypt
+              is_nullable: 0
+              size: 10
+            real_name:
+              data_type: varchar
+              default_value: ''
+              is_nullable: 0
+              size: 255
+            use_as_display_name:
+              data_type: varchar
+              default_value: username
+              is_nullable: 1
+              size: 10
+            username:
+              data_type: varchar
+              is_nullable: 0
+              size: 30
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - date_created
+            - date_updated
+            - admin
+            - real_name
+            - password_type
+            - password_salt
+            - username
+            - email
+            - password
+            - use_as_display_name
+            - developer
+            - last_login
+          _primaries: &4
+            - id
+          _relationships:
+            api_key_permissions:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKeyPermission
+              cond:
+                foreign.user_id: self.id
+              source: TryIt::DB::Result::APIKeyPermission
+            api_keys:
+              attrs:
+                accessor: multi
+                cascade_copy: 1
+                cascade_delete: 1
+                join_type: LEFT
+              class: TryIt::DB::Result::APIKey
+              cond:
+                foreign.user_id: self.id
+              source: TryIt::DB::Result::APIKey
+          _unique_constraints:
+            primary: *4
+            users_email:
+              - email
+            users_username:
+              - username
+          name: users
+          result_class: TryIt::DB::Result::User
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::ResultSet
+          schema: *1
+          source_name: User
+        __VERSION: !!perl/hash:DBIx::Class::ResultSource::Table
+          _columns:
+            ddl:
+              data_type: text
+              is_nullable: 1
+            id:
+              data_type: int
+              is_auto_increment: 1
+            upgrade_sql:
+              data_type: text
+              is_nullable: 1
+            version:
+              data_type: varchar
+              size: 50
+          _columns_info_loaded: 0
+          _ordered_columns:
+            - id
+            - version
+            - ddl
+            - upgrade_sql
+          _primaries: &5
+            - id
+          _relationships: {}
+          _unique_constraints:
+            dbix_class_deploymenthandler_versions_version:
+              - version
+            primary: *5
+          name: dbix_class_deploymenthandler_versions
+          result_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResult
+          resultset_attributes: {}
+          resultset_class: DBIx::Class::DeploymentHandler::VersionStorage::Standard::VersionResultSet
+          schema: *1
+          source_name: __VERSION
+      storage: !!perl/hash:DBIx::Class::Storage::DBI::mysql
+        _conn_pid: 10045
+        _connect_info:
+          - DBI:mysql:database=tryit
+          - tryit
+          - tryit
+          - mysql_enable_utf8: 1
+          - quote_names: 1
+        _dbh: !!perl/hash:DBI::db {}
+        _dbh_autocommit: 1
+        _dbh_details: {}
+        _dbh_gen: 0
+        _dbi_connect_info:
+          - DBI:mysql:database=tryit
+          - tryit
+          - tryit
+          - &6
+            AutoCommit: 1
+            PrintError: 0
+            RaiseError: 1
+            ShowErrorStatement: 1
+            mysql_enable_utf8: 1
+        _dbic_connect_attributes: *6
+        _driver_determined: 1
+        _in_do_block: 0
+        _sql_maker: !!perl/hash:DBIx::Class::SQLMaker::MySQL
+          array_datatypes: 1
+          bindtype: columns
+          cmp: =
+          equality_op: !!perl/regexp (?^i:^(\=|is|(is\s+)?like)$)
+          inequality_op: !!perl/regexp (?^i:^(!=|<>|(is\s+)?not(\s+like)?)$)
+          injection_guard: !!perl/regexp |-
+            (?^mix:
+                \;
+                  |
+                ^ \s* go \s
+              )
+          limit_dialect: LimitXY
+          logic: OR
+          name_sep: .
+          quote_char: '`'
+          quote_names: 1
+          special_ops:
+            - handler: _where_field_BETWEEN
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? between $)'
+            - handler: _where_field_IN
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? in      $)'
+            - handler: _where_op_IDENT
+              regex: !!perl/regexp (?^ix:^ ident                 $)
+            - handler: _where_op_VALUE
+              regex: !!perl/regexp (?^ix:^ value                 $)
+          sqlfalse: 0=1
+          sqltrue: 1=1
+          unary_ops:
+            - handler: _where_op_ANDOR
+              regex: !!perl/regexp '(?^ix:^ and  (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_ANDOR
+              regex: !!perl/regexp '(?^ix:^ or   (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_NEST
+              regex: !!perl/regexp '(?^ix:^ nest (?: [_\s]? \d+ )? $)'
+            - handler: _where_op_BOOL
+              regex: !!perl/regexp '(?^ix:^ (?: not \s )? bool     $)'
+            - handler: _where_op_IDENT
+              regex: !!perl/regexp (?^ix:^ ident                  $)
+            - handler: _where_op_VALUE
+              regex: !!perl/regexp (?^ix:^ value                  $)
+        _sql_maker_opts:
+          quote_names: 1
+        savepoints: []
+        schema: *1
+        transaction_depth: 0
+    sources:
+      - __VERSION
+  parser_type: SQL::Translator::Parser::DBIx::Class
+  producer_args: {}
+  producer_type: SQL::Translator::Producer::YAML
+  show_warnings: 0
+  trace: 0
+  version: 0.11016
