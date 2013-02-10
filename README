@@ -1,4 +1,3 @@
-
 this project was created using Wing
 
 https://github.com/plainblack/Wing
@@ -31,7 +30,7 @@ source /data/Wing/bin/dataapps.sh
   # edit the "db" section and add the username and password.
 
  vi /data/TryIt/etc/log4perl.conf
-    # edit path for log
+    # edit path for log ( not required if app will run as root user )
 
 3. Initialize the database:
 
