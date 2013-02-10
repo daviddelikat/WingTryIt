@@ -1,0 +1,61 @@
+
+this project was created using Wing
+
+https://github.com/plainblack/Wing
+
+NOTE that I did not use the documented method for 
+installing Wing ( see README in the Wing repository )
+I trimmed it significantly and used my own local perl
+and mysql because I was having too many conflicts
+with the system applications.  I will likely create
+a fork of Wing with the scripts that I used or at least
+some description of it.
+
+The following commands were used to create this project;
+much of the text is copied directly from the Wing README
+and filled in with my working parameters.
+
+source /data/Wing/bin/dataapps.sh
+
+1. Create a project:
+
+  cd /data/Wing/bin
+  export WING_HOME=/data/Wing
+  perl wing_init_app.pl --app=TryIt
+
+2. Create a database on your MySQL server to host the project, and edit the Wing config to match:
+
+  mysql -uroot -p -e "create database tryit;grant all privileges on tryit.* to tryit@localhost identified by 'tryit';flush privileges;" 
+
+  vi /data/TryIt/etc/wing.conf  
+  # edit the "db" section and add the username and password.
+
+ vi /data/TryIt/etc/log4perl.conf
+    # edit path for log
+
+3. Initialize the database:
+
+  cd /data/TryIt/bin
+  export WING_HOME=/data/Wing
+  export WING_APP=/data/TryIt/
+  export WING_CONFIG=/data/TryIt/etc/wing.conf
+  perl $WING_HOME/bin/wing_db.pl --install --ok
+
+4. Start up the rest server and/or web server:
+
+  cd /data/TryIt/bin
+  ./start_rest.sh  &
+  ./start_web.sh  &
+
+5. Now you can connect to the rest server and see if it's alive:
+
+   curl http://localhost:5000/api/status
+
+   curl http://localhost:5001/account
+
+ NOTE: By default there is one user named 'Admin' with a password of '123qwe'.
+
+6. We also provide you with an nginx config file to give you a baseline for serving your apps. You can start it like this:
+
+    sudo nginx -c /data/TryIt/etc/nginx.conf
+
